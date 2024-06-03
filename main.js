@@ -94,7 +94,6 @@ document.getElementById("button-5").addEventListener("click", () => {
 })  
 
 // Task 6:
-
 document.getElementById("button-6").addEventListener("click", () => { 
   let number_1 = document.getElementById("number-1").value;
   let number_2 = document.getElementById("number-2").value;
@@ -114,47 +113,46 @@ document.getElementById("button-7").addEventListener("click", () => {
 
 })  
 
-function deleteElement(element, arr) {
-
-  return arr.filter((number) => { 
-    return number != element
-  })
-  
-}
 // Task 8:
-document.getElementById("button-8").addEventListener("click", () => { 
-  let newArray3;
-  currenArray.map(element => {
-    if(element <= 2) { 
-      return;
-    } else {
-      for(let i = 2 ; i < element; i ++ ){
-        if (element % i == 0) {
-          return newArray3 = deleteElement(element, currenArray);
-        }
-      }
+function isPrime(num) {
+  if (num <= 1) return false;
+  if (num <= 3) return true;
+  if (num % 2 === 0 || num % 3 === 0) return false;
+  for (let i = 5; i * i <= num; i += 6) {
+    if (num % i === 0 || num % (i + 2) === 0) return false;
+  }
+  return true;
+}
+
+function findFirstPrime(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    if (isPrime(arr[i])) {
+      return arr[i]; 
     }
-  })
-  document.getElementById("ex-8").innerHTML = newArray3;
-}) 
+  }
+  return -1; 
+}
+
+document.getElementById("button-8").addEventListener("click", () => { 
+  let firstPrime = findFirstPrime(currenArray);
+  document.getElementById("ex-8").innerHTML = firstPrime;
+});
 
 // Task 9:
+function isInteger(num) {
+  return num % 1 === 0;
+}
+
 document.getElementById("button-9").addEventListener("click", () => { 
-  let newArray3 = []
-  currenArray.map(element => {
-    if(element <= 2) { 
-      return;
+  let count = 0;
+  currenArray.map((number) => { 
+    if(isInteger(number)) { 
+      count += 1;
     } else {
-      for(let i = 2; i <= element - 1; i++) {
-        if (element % i == 0) {
-          return;
-        } else {
-          console.log(element);
-        }
-      }
+      return;
     }
   })
-  document.getElementById("ex-9").innerHTML = newArray;
+  document.getElementById("ex-9").innerHTML = count;
 }) 
 
 // Task 10:
